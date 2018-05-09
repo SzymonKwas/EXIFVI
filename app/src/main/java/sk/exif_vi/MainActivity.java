@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         //loadImagepaths(android.os.Environment.getExternalStorageDirectory());
         //loadImagepaths(new File (Environment.getExternalStorageDirectory().getAbsolutePath()+"/DCMI/jpg"));
-        loadImagepaths(new File("/storage/3334-AE98/DCIM/jpg"));
+//        loadImagepaths(new File("/storage/3334-AE98/DCIM/jpg"));
+        loadImagepaths(new File("/storage/emulated/0/DCIM/jpg"));
         GridView gridview = (GridView) findViewById(R.id.imageView);
         gridview.setAdapter(new ImageAdapter(this, fileArray.toArray(new Image[fileArray.size()])));
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     public void loadImagepaths(File file) {
         for (File f : file.listFiles()) {
-            if (fileArray.size() > 150) {
+            if (fileArray.size() > 40) {
                 break;
             }
             if (f.isDirectory()) {

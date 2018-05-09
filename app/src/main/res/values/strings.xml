@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">EXIF_Vi</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="predicate1">eq</string>
+    <string name="predicate2">lt</string>
+    <string name="predicate3">gt</string>
+
+    <string name="empty"></string>
+    <string name="on">on</string>
+    <string name="off">off</string>
 </resources>

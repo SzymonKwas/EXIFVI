@@ -35,6 +35,7 @@ public class ImageFull extends AppCompatActivity {
         exifText = findViewById(R.id.exifText);
         image = findViewById(R.id.imageViewFull);
         returnBtn = findViewById(R.id.returnBtn);
+        returnBtn.setVisibility(INVISIBLE);
 
         try {
             path = intent.getStringExtra("filePath");
@@ -50,7 +51,7 @@ public class ImageFull extends AppCompatActivity {
 
     private void loadImage(String path) throws IOException {
 
-        image.setImageBitmap(bitmapConverter.getImageBitmap(path));
+        image.setImageBitmap(bitmapConverter.getImageOriginalBitmap(path));
         ExifInterface exifInterface = new ExifInterface(path);
         MyExif exif = new MyExif(exifInterface);
 
@@ -61,6 +62,8 @@ public class ImageFull extends AppCompatActivity {
     public void showExifInfo(View view) {
         int visibility = exifText.getVisibility() == VISIBLE ? INVISIBLE : VISIBLE;
         exifText.setVisibility(visibility);
+        visibility = exifText.getVisibility() == VISIBLE ? VISIBLE : INVISIBLE;
+        returnBtn.setVisibility(visibility);
     }
 
     public void returnToMainActivity (View view){

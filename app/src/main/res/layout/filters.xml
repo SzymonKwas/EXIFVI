@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/FiltersTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textStyle="bold"
+        android:typeface="sans"
+        tools:text="Filters" />
+
+    <LinearLayout
+        android:id="@+id/DatetimeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FiltersTextView"
+        android:layout_marginTop="80dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/DatetimeTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="Datetime"
+            android:inputType="datetime"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"/>
+        <Spinner
+            android:id="@+id/Datetimepredicate"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/predicatelist"
+            android:prompt="@string/predicate1"
+            android:textSize="16sp"
+            android:textColor="@color/textColor" />
+
+        <EditText
+            android:id="@+id/DatetimeeditText"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="datetime"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            tools:text="datetime" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/FlashLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DatetimeLayout"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/FlashTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="Flash"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"/>
+
+        <Spinner
+            android:id="@+id/FlashLengthpredicate"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/switched"
+            android:prompt="@string/empty"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/FocalLengthLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FlashLayout"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/FocalLengthTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="FocalLength"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"/>
+
+        <Spinner
+            android:id="@+id/FocalLengthpredicate"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/predicatelist"
+            android:prompt="@string/predicate1"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"/>
+
+        <EditText
+            android:id="@+id/FocalLengthEditText"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="textFilter"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            tools:text="focal length" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ImgLengthLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/FocalLengthLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ImgLengthTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="ImgLength"
+            android:textSize="16sp"
+            android:textColor="@color/textColor" />
+
+        <Spinner
+            android:id="@+id/ImgLengthpredicate"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/predicatelist"
+            android:prompt="@string/predicate1"
+            android:textSize="16sp"
+            android:textColor="@color/textColor" />
+
+        <EditText
+            android:id="@+id/imageEditText"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="number"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            tools:text="image length" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ImgWidthLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/ImgLengthLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ImgWidthTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="ImgWidth"
+            android:textSize="16sp"
+            android:textColor="@color/textColor" />
+
+        <Spinner
+            android:id="@+id/ImgWidthpredicate"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/predicatelist"
+            android:prompt="@string/predicate1"
+            android:textSize="16sp"
+            android:textColor="@color/textColor" />
+
+        <EditText
+            android:id="@+id/imageWidthEditText"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="number"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            tools:text="image length" />
+    </LinearLayout>
+
+</RelativeLayout>
