@@ -1,7 +1,8 @@
 package sk.exif_vi.Image;
 
 import android.graphics.Bitmap;
-import android.media.ExifInterface;
+
+import sk.exif_vi.MyExif.MyExif;
 
 public class Image {
 

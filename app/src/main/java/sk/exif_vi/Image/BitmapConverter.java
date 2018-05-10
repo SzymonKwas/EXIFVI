@@ -7,7 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 public class BitmapConverter {
-    private static int QUALITY = 5;
+    private static int QUALITY = 10;
     private BitmapFactory.Options options;
 
     public BitmapConverter() {

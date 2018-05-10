@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import sk.exif_vi.Image.BitmapConverter;
-import sk.exif_vi.Image.MyExif;
+import sk.exif_vi.MyExif.MyExif;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -53,7 +52,7 @@ public class ImageFull extends AppCompatActivity {
 
         image.setImageBitmap(bitmapConverter.getImageOriginalBitmap(path));
         ExifInterface exifInterface = new ExifInterface(path);
-        MyExif exif = new MyExif(exifInterface);
+        MyExif exif = new MyExif(exifInterface,path);
 
         exifText.setText(exif.toString());
         exifText.setVisibility(INVISIBLE);
