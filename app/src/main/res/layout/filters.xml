@@ -23,11 +23,10 @@
 
         <TextView
             android:id="@+id/filtersTextView"
-            android:layout_width="178dp"
+            android:layout_width="166dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:lay="true"
             android:text="Filters"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"

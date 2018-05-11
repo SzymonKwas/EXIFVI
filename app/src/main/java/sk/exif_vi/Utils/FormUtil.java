@@ -45,11 +45,11 @@ public class FormUtil {
         }
 
         switch (stringPredication) {
-            case "ON":
-                return "true";
+            case "on":
+                return "1";
 
-            case "OFF":
-                return "false";
+            case "off":
+                return "0";
 
             default:
                 return null;
@@ -67,7 +67,7 @@ public class FormUtil {
                 return condition;
             }
         }
-        return "";
+        return query;
     }
 
 }

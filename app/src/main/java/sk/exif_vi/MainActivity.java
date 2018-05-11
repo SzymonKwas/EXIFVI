@@ -1,11 +1,14 @@
 package sk.exif_vi;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.ExifInterface;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,12 +18,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.greendao.query.QueryBuilder;
 import org.greenrobot.greendao.query.WhereCondition;
 
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private BitmapConverter bitmapConverter = new BitmapConverter();
     private DaoSession daoSession;
     private MyExifDao myExifDao;
-    private GridView gridview;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,10 +71,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        while (!askPermission(REQUEST_ID_READ_PERMISSION, Manifest.permission.READ_EXTERNAL_STORAGE));
+        while (!askPermission(REQUEST_ID_READ_PERMISSION, Manifest.permission.READ_EXTERNAL_STORAGE))
+            ;
         setContentView(R.layout.activity_main);
 
-        Button filterButton = (Button) findViewById(R.id.button);
+        Button filterButton = findViewById(R.id.buttonSearch);
         filterButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -76,7 +83,19 @@ public class MainActivity extends AppCompatActivity {
                 QueryBuilder<MyExif> query = myExifDao.queryBuilder();
                 String queryString = getQueryStringFromForm();
                 WhereCondition.StringCondition stringCondition = new WhereCondition.StringCondition(queryString);
+                if(StringUtils.isNotEmpty(queryString)){
+                    query.where(stringCondition);
+                }
                 loadFiltredImages(query.build().list());
+            }
+        });
+
+        Button resetButton = findViewById(R.id.buttonReset);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                resetForm();
             }
         });
 
@@ -91,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         loadImages();
 
-        gridview = (GridView) findViewById(R.id.imageView);
+        GridView gridview = (GridView) findViewById(R.id.imageView);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -99,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         gridview.setAdapter(new ImageAdapter(this, fileArray.toArray(new Image[fileArray.size()])));
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     public void loadImagepaths(File file) {
@@ -141,33 +160,99 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void resetForm() {
+        TextView datetime = findViewById(R.id.datetimeeditText);
+        datetime.setText("");
+
+        Spinner datetimePredicateSpinner = findViewById(R.id.datetimePredicate);
+        datetimePredicateSpinner.setSelection(0);
+
+        Spinner flashLengthpredicate = findViewById(R.id.flashLengthpredicate);
+        flashLengthpredicate.setSelection(0);
+
+        TextView objectiveEditText = findViewById(R.id.objectiveEditText);
+        objectiveEditText.setText("");
+
+        Spinner objectivePredicateSpinner = findViewById(R.id.objectivePredicate);
+        objectivePredicateSpinner.setSelection(0);
+
+        TextView ocularEditText = findViewById(R.id.ocularEditText);
+        ocularEditText.setText("");
+
+        Spinner ocularPredicateSpinner = findViewById(R.id.ocularpredicate);
+        ocularPredicateSpinner.setSelection(0);
+
+
+        TextView imageEditText = findViewById(R.id.imageEditText);
+        imageEditText.setText("");
+
+        Spinner imgLengthPredicateSpinner = findViewById(R.id.imgLengthpredicate);
+        imgLengthPredicateSpinner.setSelection(0);
+
+        TextView imageWidthEditText = findViewById(R.id.imageWidthEditText);
+        imageWidthEditText.setText("");
+
+        Spinner imgWidthPredicateSpinner = findViewById(R.id.imgWidthpredicate);
+        imgWidthPredicateSpinner.setSelection(0);
+
+    }
+
     private String getQueryStringFromForm() {
 
         String queryString = "";
 
         TextView datetime = findViewById(R.id.datetimeeditText);
         Spinner datetimePredicateSpinner = findViewById(R.id.datetimePredicate);
-        queryString = FormUtil.joinQuery(queryString, FormUtil.DATETIME, datetimePredicateSpinner.getSelectedItem().toString(), datetime.getText().toString());
-
+        queryString = FormUtil.joinQuery(
+                queryString,
+                FormUtil.DATETIME,
+                FormUtil.getPredicationSign(datetimePredicateSpinner.getSelectedItem().toString()),
+                datetime.getText().toString()
+        );
 
         Spinner flashLengthpredicate = findViewById(R.id.flashLengthpredicate);
-        queryString = FormUtil.joinQuery(queryString, FormUtil.FLASH, " = ", FormUtil.getSwitched(flashLengthpredicate.getSelectedItem()));
+        queryString = FormUtil.joinQuery(
+                queryString,
+                FormUtil.FLASH,
+                " = ",
+                FormUtil.getSwitched(flashLengthpredicate.getSelectedItem())
+        );
 
         TextView objectiveEditText = findViewById(R.id.objectiveEditText);
         Spinner objectivePredicateSpinner = findViewById(R.id.objectivePredicate);
-        queryString = FormUtil.joinQuery(queryString, FormUtil.FOCAL_LENGTH_OBJECTIVE, objectivePredicateSpinner.getSelectedItem().toString(), objectiveEditText.getText().toString());
+        queryString = FormUtil.joinQuery(
+                queryString,
+                FormUtil.FOCAL_LENGTH_OBJECTIVE,
+                FormUtil.getPredicationSign(objectivePredicateSpinner.getSelectedItem().toString()),
+                objectiveEditText.getText().toString()
+        );
 
         TextView ocularEditText = findViewById(R.id.ocularEditText);
         Spinner ocularPredicateSpinner = findViewById(R.id.ocularpredicate);
-        queryString = FormUtil.joinQuery(queryString, FormUtil.FOCAL_LENGTH_OCULAR, ocularPredicateSpinner.getSelectedItem().toString(), ocularEditText.getText().toString());
+        queryString = FormUtil.joinQuery(
+                queryString,
+                FormUtil.FOCAL_LENGTH_OCULAR,
+                FormUtil.getPredicationSign(ocularPredicateSpinner.getSelectedItem().toString()),
+                ocularEditText.getText().toString()
+        );
 
         TextView imageEditText = findViewById(R.id.imageEditText);
         Spinner imgLengthPredicateSpinner = findViewById(R.id.imgLengthpredicate);
-        queryString = FormUtil.joinQuery(queryString, FormUtil.IMAGE_LENGTH, imgLengthPredicateSpinner.getSelectedItem().toString(), imageEditText.getText().toString());
+        queryString = FormUtil.joinQuery(
+                queryString,
+                FormUtil.IMAGE_LENGTH,
+                FormUtil.getPredicationSign(imgLengthPredicateSpinner.getSelectedItem().toString()),
+                imageEditText.getText().toString()
+        );
 
         TextView imageWidthEditText = findViewById(R.id.imageWidthEditText);
         Spinner imgWidthPredicateSpinner = findViewById(R.id.imgWidthpredicate);
-        queryString = FormUtil.joinQuery(queryString, FormUtil.IMAGE_WIDTH, imgWidthPredicateSpinner.getSelectedItem().toString(), imageWidthEditText.getText().toString());
+        queryString = FormUtil.joinQuery(
+                queryString,
+                FormUtil.IMAGE_WIDTH,
+                FormUtil.getPredicationSign(imgWidthPredicateSpinner.getSelectedItem().toString()),
+                imageWidthEditText.getText().toString()
+        );
 
         return queryString;
     }
@@ -188,16 +273,28 @@ public class MainActivity extends AppCompatActivity {
             image.setExif(myExif);
             fileArray.add(image);
         }
-
+        Toast.makeText(MainActivity.this, "Found "+fileArray.size() + "images!",
+                Toast.LENGTH_LONG).show();
     }
 
     private void loadFiltredImages(List<MyExif> myExifs) {
+        GridView gridview = (GridView) findViewById(R.id.imageView);
+        fileArray.clear();
         for (MyExif myExif : myExifs) {
             Image image = new Image(myExif.getPathOfFile());
             image.setBitmap(bitmapConverter.getImageBitmap(myExif.getPathOfFile()));
             image.setExif(myExif);
             fileArray.add(image);
         }
+        AppBarLayout appbar = findViewById(R.id.appbar);
+        appbar.setExpanded(false);
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        Toast.makeText(MainActivity.this, "Found "+fileArray.size() + "images!",
+                Toast.LENGTH_LONG).show();
         gridview.setAdapter(new ImageAdapter(this, fileArray.toArray(new Image[fileArray.size()])));
     }
 
