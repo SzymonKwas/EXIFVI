@@ -19,7 +19,9 @@ public class MyExif {
         this.pathOfFile = pathOfFile;
         setDatetime(DateTimeFormatterUtil.parseStringToDate(exifInterface.getAttribute(ExifInterface.TAG_DATETIME)));
         setFlash(CustomParse.parseLong(exifInterface.getAttribute(ExifInterface.TAG_FLASH)));
-        setFocalLength(exifInterface.getAttribute(ExifInterface.TAG_FOCAL_LENGTH));
+        Long[] focalLengths = CustomParse.parseToObjectiveAndOcular(exifInterface.getAttribute(ExifInterface.TAG_FOCAL_LENGTH));
+        setFocalLengthObjective(focalLengths[0]);
+        setFocalLengthOcular(focalLengths[1]);
         setGpsDatestamp(exifInterface.getAttribute(ExifInterface.TAG_GPS_DATESTAMP));
         setGpsLatitude(exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE));
         setGpsLatitudeRef(exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF));
@@ -35,15 +37,16 @@ public class MyExif {
         setWhiteBalance(CustomParse.parseBoolean(exifInterface.getAttribute(ExifInterface.TAG_WHITE_BALANCE)));
     }
 
-    @Generated(hash = 1078695587)
-    public MyExif(Long id, Date datetime, Long Flash, String focalLength, String gpsDatestamp, String gpsLatitude,
-            String gpsLatitudeRef, String gpsLongitude, String gpsLongitudeRef, String gpsProcessingMethod,
-            String gpsTimestamp, Long imageLength, Long imageWidth, String Make, String Model, Long Orientation,
-            Boolean whiteBalance, String pathOfFile) {
+    @Generated(hash = 1600058262)
+    public MyExif(Long id, Date datetime, Long Flash, Long focalLengthObjective, Long focalLengthOcular, String gpsDatestamp,
+            String gpsLatitude, String gpsLatitudeRef, String gpsLongitude, String gpsLongitudeRef, String gpsProcessingMethod,
+            String gpsTimestamp, Long imageLength, Long imageWidth, String Make, String Model, Long Orientation, Boolean whiteBalance,
+            String pathOfFile) {
         this.id = id;
         this.datetime = datetime;
         this.Flash = Flash;
-        this.focalLength = focalLength;
+        this.focalLengthObjective = focalLengthObjective;
+        this.focalLengthOcular = focalLengthOcular;
         this.gpsDatestamp = gpsDatestamp;
         this.gpsLatitude = gpsLatitude;
         this.gpsLatitudeRef = gpsLatitudeRef;
@@ -64,11 +67,13 @@ public class MyExif {
     public MyExif() {
     }
 
+
     @Id(autoincrement = true)
     private Long id;
     private Date datetime;
     private Long Flash;
-    private String focalLength;
+    private Long focalLengthObjective;
+    private Long focalLengthOcular;
     private String gpsDatestamp;
     private String gpsLatitude;
     private String gpsLatitudeRef;
@@ -96,13 +101,6 @@ public class MyExif {
         this.Flash = Flash;
     }
 
-    public String getFocalLength() {
-        return focalLength;
-    }
-
-    public void setFocalLength(String FocalLength) {
-        this.focalLength = FocalLength;
-    }
 
     public String getGpsDatestamp() {
         return gpsDatestamp;
@@ -228,12 +226,34 @@ public class MyExif {
         this.pathOfFile = pathOfFile;
     }
 
+    public Long getFocalLengthObjective() {
+        return focalLengthObjective;
+    }
+
+    public void setFocalLengthObjective(Long focalLengthObjective) {
+        this.focalLengthObjective = focalLengthObjective;
+    }
+
+    public Long getFocalLengthOcular() {
+        return focalLengthOcular;
+    }
+
+    public void setFocalLengthOcular(Long focalLengthOcular) {
+        this.focalLengthOcular = focalLengthOcular;
+    }
+
+    private String focalLengthToString() {
+        return focalLengthObjective != null && focalLengthOcular != null
+                ? focalLengthOcular.toString() + "/" + focalLengthObjective.toString()
+                : "";
+    }
+
     @Override
     public String toString() {
         return (
-                "Date Time: " + datetime + "\n" +
+                        "Date Time: " + datetime + "\n" +
                         "Flash: " + Flash + "\n" +
-                        "Focal Length: " + focalLength + "\n" +
+                        "Focal Length: " + focalLengthToString() + "\n" +
                         "GPS Date Stamp: " + gpsDatestamp + "\n" +
                         "GPS Latitude: " + gpsLatitude + "\n" +
                         "GPS Latitute Ref: " + gpsLatitudeRef + "\n" +

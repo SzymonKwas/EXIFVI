@@ -4,49 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/FiltersTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textStyle="bold"
-        android:typeface="sans"
-        tools:text="Filters" />
 
     <LinearLayout
-        android:id="@+id/DatetimeLayout"
+        android:id="@+id/menuLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/FiltersTextView"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:text="Search" />
+
         <TextView
-            android:id="@+id/DatetimeTextView"
+            android:id="@+id/filtersTextView"
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:lay="true"
+            android:text="Filters"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:visibility="visible"
+            tools:text="Filters" />
+        <Button
+            android:id="@+id/buttonReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:text="Reset" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/datetimeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/menuLayout"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/datetimeTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
-            android:text="Datetime"
             android:inputType="datetime"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:text="Datetime"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
         <Spinner
-            android:id="@+id/Datetimepredicate"
+            android:id="@+id/datetimePredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/predicatelist"
             android:prompt="@string/predicate1"
-            android:textSize="16sp"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/DatetimeeditText"
+            android:id="@+id/datetimeeditText"
             android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -58,15 +85,15 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/FlashLayout"
+        android:id="@+id/flashLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/DatetimeLayout"
+        android:layout_below="@+id/datetimeLayout"
         android:layout_marginTop="2dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/FlashTextView"
+            android:id="@+id/flashTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
@@ -75,7 +102,7 @@
             android:textColor="@color/textColor"/>
 
         <Spinner
-            android:id="@+id/FlashLengthpredicate"
+            android:id="@+id/flashLengthpredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -87,42 +114,99 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/FocalLengthLayout"
-        android:layout_width="wrap_content"
+        android:id="@+id/focalLengthLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/FlashLayout"
+        android:layout_below="@+id/flashLayout"
+        android:layout_centerInParent="true"
         android:layout_marginTop="2dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/FocalLengthTextView"
+            android:id="@+id/focalLengthTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="FocalLength"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ObjectiveLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/focalLengthLayout"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/objectiveTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="Objective"
             android:textSize="16sp"
             android:textColor="@color/textColor"/>
 
         <Spinner
-            android:id="@+id/FocalLengthpredicate"
+            android:id="@+id/objectivePredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/predicatelist"
             android:prompt="@string/predicate1"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/FocalLengthEditText"
+            android:id="@+id/objectiveEditText"
             android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:ems="10"
-            android:inputType="textFilter"
+            android:inputType="number"
             android:textColor="@color/textColor"
             android:textSize="16sp"
-            tools:text="focal length" />
+            tools:text="objective" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ocularLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ObjectiveLayout"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ocularTextView"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="Ocular"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"/>
+
+        <Spinner
+            android:id="@+id/ocularpredicate"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:entries="@array/predicatelist"
+            android:prompt="@string/predicate1"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/ocularEditText"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="number"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
+            tools:text="ocular" />
     </LinearLayout>
 
     <LinearLayout
@@ -130,11 +214,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_below="@+id/FocalLengthLayout"
+        android:layout_below="@+id/ocularLayout"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/ImgLengthTextView"
+            android:id="@+id/imgLengthTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
@@ -143,14 +227,14 @@
             android:textColor="@color/textColor" />
 
         <Spinner
-            android:id="@+id/ImgLengthpredicate"
+            android:id="@+id/imgLengthpredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/predicatelist"
             android:prompt="@string/predicate1"
-            android:textSize="16sp"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/imageEditText"
@@ -164,7 +248,7 @@
             tools:text="image length" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/ImgWidthLayout"
+        android:id="@+id/imgWidthLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -172,7 +256,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/ImgWidthTextView"
+            android:id="@+id/imgWidthTextView"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
@@ -181,14 +265,14 @@
             android:textColor="@color/textColor" />
 
         <Spinner
-            android:id="@+id/ImgWidthpredicate"
+            android:id="@+id/imgWidthpredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/predicatelist"
             android:prompt="@string/predicate1"
-            android:textSize="16sp"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/imageWidthEditText"
