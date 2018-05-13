@@ -42,12 +42,12 @@
         android:id="@+id/imageView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_gravity="center"
         android:columnWidth="90dp"
-        app:layout_anchorGravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp"></GridView>
+        android:verticalSpacing="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></GridView>
 
 </android.support.design.widget.CoordinatorLayout>

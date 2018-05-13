@@ -1,5 +1,7 @@
 package sk.exif_vi.Utils;
 
+import android.widget.Adapter;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class FormUtil {
@@ -14,10 +16,10 @@ public class FormUtil {
     public static final String FOCAL_LENGTH_OCULAR = " FOCAL_LENGTH_OCULAR ";
     public static final String IMAGE_LENGTH = " IMAGE_LENGTH ";
     public static final String IMAGE_WIDTH = " IMAGE_WIDTH ";
-    public static final String MAKE = " MAKE ";
-    public static final String MODEL = " MODEL ";
     public static final String ORIENTATION = " ORIENTATION ";
     public static final String WHITE_BALANCE = " WHITE_BALANCE ";
+    public static final String MAKE = " MAKE ";
+    public static final String MODEL = " MODEL ";
 
 
     public static String getPredicationSign(String predication) {
@@ -70,4 +72,30 @@ public class FormUtil {
         return query;
     }
 
+
+    public static String getSqlStringQuery(String stringValue) {
+        return StringUtils.isNotEmpty(stringValue) ? "'" + stringValue + "'" : stringValue;
+    }
+
+    public static int getPositionFromSpinner(Adapter adapter, String value) {
+        for (int i = 0; i < adapter.getCount(); i++) {
+            if (
+                    StringUtils.compare(value, adapter.getItem(i).toString()) == 0
+                    ) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public static String getExifValue(String value){
+        return StringUtils.isNotEmpty(value)? value : null;
+    }
+
+    public static String getExifValue(Long value){
+        return value != null ? value.toString() : null;
+    }
+    public static String getExifValue(Boolean value){
+        return value != null ? value.toString() : null;
+    }
 }

@@ -1,10 +1,11 @@
-package sk.exif_vi.MyExif;
+package sk.exif_vi.Entity;
 
 import android.media.ExifInterface;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Property;
 
 import java.util.Date;
 
@@ -19,9 +20,12 @@ public class MyExif {
         this.pathOfFile = pathOfFile;
         setDatetime(DateTimeFormatterUtil.parseStringToDate(exifInterface.getAttribute(ExifInterface.TAG_DATETIME)));
         setFlash(CustomParse.parseLong(exifInterface.getAttribute(ExifInterface.TAG_FLASH)));
+
         Long[] focalLengths = CustomParse.parseToObjectiveAndOcular(exifInterface.getAttribute(ExifInterface.TAG_FOCAL_LENGTH));
-        setFocalLengthObjective(focalLengths[0]);
-        setFocalLengthOcular(focalLengths[1]);
+        if(focalLengths != null){
+            setFocalLengthObjective(focalLengths[0]);
+            setFocalLengthOcular(focalLengths[1]);
+        }
         setGpsDatestamp(exifInterface.getAttribute(ExifInterface.TAG_GPS_DATESTAMP));
         setGpsLatitude(exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE));
         setGpsLatitudeRef(exifInterface.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF));
@@ -70,23 +74,41 @@ public class MyExif {
 
     @Id(autoincrement = true)
     private Long id;
+    @Property(nameInDb = "DATETIME")
     private Date datetime;
+    @Property(nameInDb = "FLASH")
     private Long Flash;
+    @Property(nameInDb = "FOCAL_LENGTH_OBJECTIVE")
     private Long focalLengthObjective;
+    @Property(nameInDb = "FOCAL_LENGTH_OCULAR")
     private Long focalLengthOcular;
+    @Property(nameInDb = "GPS_DATESTAMP")
     private String gpsDatestamp;
+    @Property(nameInDb = "GPS_LATITUDE")
     private String gpsLatitude;
+    @Property(nameInDb = "GPS_LATITUDE_REF")
     private String gpsLatitudeRef;
+    @Property(nameInDb = "GPS_LONGITUDE")
     private String gpsLongitude;
+    @Property(nameInDb = "GPS_LONGITUDE_REF")
     private String gpsLongitudeRef;
+    @Property(nameInDb = "GPS_PROCESSING_METHOD")
     private String gpsProcessingMethod;
+    @Property(nameInDb = "GPS_TIMESTAMP")
     private String gpsTimestamp;
+    @Property(nameInDb = "IMAGE_LENGTH")
     private Long imageLength;
+    @Property(nameInDb = "IMAGE_WIDTH")
     private Long imageWidth;
+    @Property(nameInDb = "MAKE")
     private String Make;
+    @Property(nameInDb = "MODEL")
     private String Model;
+    @Property(nameInDb = "ORIENTATION")
     private Long Orientation;
+    @Property(nameInDb = "WHITE_BALANCE")
     private Boolean whiteBalance;
+    @Property(nameInDb = "PATH_OF_FILE")
     private String pathOfFile;
 
     public void setDatetime(Date Datetime) {
@@ -251,7 +273,7 @@ public class MyExif {
     @Override
     public String toString() {
         return (
-                        "Date Time: " + datetime + "\n" +
+                "Date Time: " + datetime + "\n" +
                         "Flash: " + Flash + "\n" +
                         "Focal Length: " + focalLengthToString() + "\n" +
                         "GPS Date Stamp: " + gpsDatestamp + "\n" +

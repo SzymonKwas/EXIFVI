@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,39 +8,26 @@
         android:id="@+id/menuLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
-            android:text="Search" />
 
         <TextView
             android:id="@+id/filtersTextView"
-            android:layout_width="166dp"
+            android:layout_width="396dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Filters"
+            android:text="Edit Exif"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textStyle="bold"
             android:typeface="sans"
             android:visibility="visible"
-            tools:text="Filters" />
-        <Button
-            android:id="@+id/buttonReset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:text="Reset" />
+            tools:text="Edit Exif" />
+
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/datetimeLayout"
         android:layout_width="wrap_content"
@@ -51,36 +37,6 @@
         android:layout_marginTop="25dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/datetimeTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:inputType="datetime"
-            android:text="Datetime"
-            android:textColor="@color/textColor"
-            android:textSize="16sp" />
-
-        <Spinner
-            android:id="@+id/datetimePredicate"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:entries="@array/predicatelist"
-            android:prompt="@string/predicate1"
-            android:textColor="@color/textColor"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/datetimeeditText"
-            android:layout_width="98dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:ems="10"
-            android:inputType="datetime"
-            android:textColor="@color/textColor"
-            android:textSize="16sp"
-            tools:text="datetime" />
     </LinearLayout>
 
     <LinearLayout
@@ -97,18 +53,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="Flash"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/flashLengthPredicate"
+            android:id="@+id/flashLengthSetPredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/switched"
             android:prompt="@string/empty"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -122,15 +78,8 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/focalLengthTextView"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:text="FocalLength"
-            android:textColor="@color/textColor"
-            android:textSize="16sp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ObjectiveLayout"
         android:layout_width="wrap_content"
@@ -145,16 +94,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="Objective"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
-
-        <Spinner
-            android:id="@+id/objectivePredicate"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:entries="@array/predicatelist"
-            android:prompt="@string/predicate1"
             android:textColor="@color/textColor"
             android:textSize="16sp" />
 
@@ -169,6 +108,7 @@
             android:textSize="16sp"
             tools:text="objective" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ocularLayout"
         android:layout_width="wrap_content"
@@ -183,16 +123,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="Ocular"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
-
-        <Spinner
-            android:id="@+id/ocularPredicate"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:entries="@array/predicatelist"
-            android:prompt="@string/predicate1"
             android:textColor="@color/textColor"
             android:textSize="16sp" />
 
@@ -212,8 +142,8 @@
         android:id="@+id/ImgLengthLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:layout_below="@+id/ocularLayout"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal">
 
         <TextView
@@ -222,16 +152,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="ImgLength"
-            android:textSize="16sp"
-            android:textColor="@color/textColor" />
-
-        <Spinner
-            android:id="@+id/imgLengthPredicate"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:entries="@array/predicatelist"
-            android:prompt="@string/predicate1"
             android:textColor="@color/textColor"
             android:textSize="16sp" />
 
@@ -246,12 +166,13 @@
             android:textSize="16sp"
             tools:text="image length" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/imgWidthLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         android:layout_below="@+id/ImgLengthLayout"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal">
 
         <TextView
@@ -260,16 +181,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="ImgWidth"
-            android:textSize="16sp"
-            android:textColor="@color/textColor" />
-
-        <Spinner
-            android:id="@+id/imgWidthPredicate"
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:entries="@array/predicatelist"
-            android:prompt="@string/predicate1"
             android:textColor="@color/textColor"
             android:textSize="16sp" />
 
@@ -290,7 +201,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgWidthLayout"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
         <TextView
@@ -299,18 +210,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:text="White Balance"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/whiteBalancePredicate"
+            android:id="@+id/whiteBalanceSetPredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/switched"
             android:prompt="@string/empty"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -319,7 +230,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/whiteBalanceLayout"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
         <TextView
@@ -332,14 +243,14 @@
             android:textSize="16sp" />
 
         <Spinner
-            android:id="@+id/orientationPredicate"
+            android:id="@+id/orientationSetPredicate"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:entries="@array/position"
             android:prompt="@string/empty"
-            android:textSize="16sp"
-            android:textColor="@color/textColor"/>
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -359,13 +270,16 @@
             android:textColor="@color/textColor"
             android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/modelPredicate"
-            android:layout_width="260dp"
+        <EditText
+            android:id="@+id/modelText"
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="number"
             android:textColor="@color/textColor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="model" />
 
     </LinearLayout>
 
@@ -386,15 +300,40 @@
             android:textColor="@color/textColor"
             android:textSize="16sp" />
 
-        <Spinner
-            android:id="@+id/makePredicate"
-            android:layout_width="257dp"
+        <EditText
+            android:id="@+id/makeText"
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:inputType="number"
             android:textColor="@color/textColor"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:text="make" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/returnEditBtn"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="25dp"
+        android:drawableLeft="@android:drawable/ic_menu_revert"
+        android:textColor="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/acceptBtn"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="33dp"
+        android:layout_marginStart="25dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:textColor="@color/colorAccent" />
 
 
 </RelativeLayout>

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.io.IOException;
 
 import sk.exif_vi.Image.BitmapConverter;
-import sk.exif_vi.MyExif.MyExif;
+import sk.exif_vi.Entity.MyExif;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -24,6 +24,7 @@ public class ImageFull extends AppCompatActivity {
     private ImageView image;
     private TextView exifText;
     private Button returnBtn;
+    private Button editBtn;
     private String path;
 
     @Override
@@ -33,8 +34,18 @@ public class ImageFull extends AppCompatActivity {
         setContentView(R.layout.activity_image_full);
         exifText = findViewById(R.id.exifText);
         image = findViewById(R.id.imageViewFull);
-        returnBtn = findViewById(R.id.returnBtn);
+
+        returnBtn = findViewById(R.id.returnEditBtn);
         returnBtn.setVisibility(INVISIBLE);
+        editBtn = findViewById(R.id.editBtn);
+        editBtn.setVisibility(INVISIBLE);
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toEditActivity(v);
+            }
+        });
 
         try {
             path = intent.getStringExtra("filePath");
@@ -63,11 +74,19 @@ public class ImageFull extends AppCompatActivity {
         exifText.setVisibility(visibility);
         visibility = exifText.getVisibility() == VISIBLE ? VISIBLE : INVISIBLE;
         returnBtn.setVisibility(visibility);
+        editBtn.setVisibility(visibility);
     }
 
     public void returnToMainActivity (View view){
         Intent intentMain = new Intent(getApplicationContext(), MainActivity.class);
         intentMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intentMain);
+    }
+
+    public void toEditActivity(View view) {
+        Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("filePath", path);
+        startActivity(intent);
     }
 }

@@ -49,6 +49,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sk.exif_vi.MainActivity" />
         </activity>
+        <activity android:name=".EditActivity"></activity>
     </application>
 
 </manifest>

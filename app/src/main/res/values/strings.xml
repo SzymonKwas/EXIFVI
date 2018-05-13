@@ -9,4 +9,13 @@
     <string name="empty"></string>
     <string name="on">on</string>
     <string name="off">off</string>
+
+    <string name="pos_1">1</string>
+    <string name="pos_2">2</string>
+    <string name="pos_3">3</string>
+    <string name="pos_4">4</string>
+    <string name="pos_5">5</string>
+    <string name="pos_6">6</string>
+    <string name="pos_7">7</string>
+    <string name="pos_8">8</string>
 </resources>

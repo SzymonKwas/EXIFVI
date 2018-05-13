@@ -2,7 +2,7 @@ package sk.exif_vi.Image;
 
 import android.graphics.Bitmap;
 
-import sk.exif_vi.MyExif.MyExif;
+import sk.exif_vi.Entity.MyExif;
 
 public class Image {
 
